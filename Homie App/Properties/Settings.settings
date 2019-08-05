@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Homie_App.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Mqtt_Server_IP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="user" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">default</Value>
+    </Setting>
+    <Setting Name="pass" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

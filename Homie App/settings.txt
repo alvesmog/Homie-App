@@ -1,0 +1,4 @@
+﻿living room
+bedroom
+kitchen
+balcony
