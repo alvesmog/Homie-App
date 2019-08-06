@@ -85,5 +85,21 @@ namespace Homie_App
 
             }
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            addDevice f = new addDevice();
+            f.FormClosed += HandleAddDeviceFormClosed;
+            f.Show();
+        }
+
+
+        private void HandleAddDeviceFormClosed(Object sender, FormClosedEventArgs e)
+        {
+            this.Enabled = true;
+            var devices = File.ReadAllLines("../../devices.txt");
+            checkedListBox1.DataSource = devices;
+        }
     }
 }
