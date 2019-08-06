@@ -13,16 +13,21 @@ namespace Homie_App
 {
     public partial class addRoom : Form
     {
-        public addRoom()
+        SettingsForm settingsform;
+        public addRoom(SettingsForm f)
         {
             InitializeComponent();
+            settingsform = f;
         }
 
-        private void PictureBox1_Click(object sender, EventArgs e)
+        public void PictureBox1_Click(object sender, EventArgs e)
         {
             var line = textBox1.Text;
             File.AppendAllText("../../settings.txt", Environment.NewLine + line);
             this.Close();
+            var rooms = File.ReadAllLines("../../settings.txt");
+            settingsform.checkedListBox2.DataSource = rooms;
+
         }
     }
 }

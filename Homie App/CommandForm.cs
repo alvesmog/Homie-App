@@ -15,6 +15,7 @@ namespace Homie_App
 {
     public partial class CommandForm : Form
     {
+
         public CommandForm()
         {
             InitializeComponent();
@@ -24,8 +25,18 @@ namespace Homie_App
 
         private void PictureBox1_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
             var SettingsForm = new SettingsForm();
+            SettingsForm.FormClosed += HandleSettingsFormClosed;
             SettingsForm.Show();
+ 
+        }
+
+        private void HandleSettingsFormClosed(Object sender, FormClosedEventArgs e)
+        {
+            this.Enabled = true;
+            var rooms = File.ReadAllLines("../../settings.txt");
+            listBox1.DataSource = rooms;
         }
     }
 }

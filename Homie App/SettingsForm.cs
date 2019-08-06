@@ -16,9 +16,11 @@ namespace Homie_App
     public partial class SettingsForm : Form
     {
         MqttClient client;
+
         public SettingsForm()
         {
             InitializeComponent();
+
 
             string Mqtt_Server_IP;
             string user;
@@ -40,6 +42,14 @@ namespace Homie_App
                 this.client = new MqttClient(Mqtt_Server_IP);
                 this.client.Connect(Guid.NewGuid().ToString(), user, pass);
             }
+
+
+
+        }
+
+        public void Refresh_Listbox()
+        {
+            this.checkedListBox1.Invalidate();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -48,13 +58,23 @@ namespace Homie_App
             Settings.Default["user"] = textBox2.Text;
             Settings.Default["pass"] = textBox3.Text;
             Settings.Default.Save();
-            MessageBox.Show("Settings saved!","Homie says...");
+            MessageBox.Show("Settings saved!", "Homie says...");
         }
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            var addRoom = new addRoom();
+            var addRoom = new addRoom(this);
             addRoom.Show();
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            List<string> lines = File.ReadAllLines("../../settings.txt").ToList();
+            foreach (string selectedItem in checkedListBox2.CheckedItems)
+            {
+                if (lines.Contains(selectedItem))
+                    lines.Remove(selectedItem);
+            }
         }
     }
 }
