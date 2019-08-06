@@ -23,7 +23,15 @@ namespace Homie_App
         public void PictureBox1_Click(object sender, EventArgs e)
         {
             var line = textBox1.Text;
-            File.AppendAllText("../../settings.txt", Environment.NewLine + line);
+            if (File.ReadAllLines("../../settings.txt").Length == 0)
+            {
+                File.AppendAllText("../../settings.txt", line);
+            }
+            else
+            {
+                File.AppendAllText("../../settings.txt", Environment.NewLine + line);
+            }
+            
             this.Close();
             var rooms = File.ReadAllLines("../../settings.txt");
             settingsform.checkedListBox2.DataSource = rooms;

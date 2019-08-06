@@ -196,10 +196,12 @@
             // 
             // checkedListBox2
             // 
+            this.checkedListBox2.CheckOnClick = true;
             this.checkedListBox2.FormattingEnabled = true;
             this.checkedListBox2.Location = new System.Drawing.Point(10, 31);
             this.checkedListBox2.Name = "checkedListBox2";
             this.checkedListBox2.Size = new System.Drawing.Size(411, 229);
+            this.checkedListBox2.Sorted = true;
             this.checkedListBox2.TabIndex = 3;
             // 
             // devices
@@ -268,7 +270,6 @@
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
- //           this.Load += new System.EventHandler(this.SettingsForm_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.mqtt.ResumeLayout(false);
             this.mqtt.PerformLayout();

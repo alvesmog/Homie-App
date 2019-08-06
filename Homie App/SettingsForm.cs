@@ -70,10 +70,19 @@ namespace Homie_App
         private void Button4_Click(object sender, EventArgs e)
         {
             List<string> lines = File.ReadAllLines("../../settings.txt").ToList();
+
             foreach (string selectedItem in checkedListBox2.CheckedItems)
             {
                 if (lines.Contains(selectedItem))
+                {
                     lines.Remove(selectedItem);
+                }
+
+                File.WriteAllLines("../../settings.txt", lines.ToArray());
+
+                var rooms = File.ReadAllLines("../../settings.txt");
+                checkedListBox2.DataSource = rooms;
+
             }
         }
     }
