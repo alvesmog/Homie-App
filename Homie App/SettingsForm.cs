@@ -58,7 +58,7 @@ namespace Homie_App
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("CREATE TABLE IF NOT EXISTS ROOMS ([ID] INTEGER PRIMARY KEY AUTOINCREMENT, [ROOM_NAME] VARCHAR(100))");
                 SQLiteCommand cmd = new SQLiteCommand(sql.ToString(), conn);
-ql                try
+                try
                 {
                     cmd.ExecuteNonQuery();
                 }

@@ -39,18 +39,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.rooms = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.devices = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.mqtt.SuspendLayout();
             this.rooms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.devices.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,15 +151,28 @@
             // rooms
             // 
             this.rooms.BackColor = System.Drawing.Color.LightGray;
+            this.rooms.Controls.Add(this.dataGridView1);
             this.rooms.Controls.Add(this.button4);
             this.rooms.Controls.Add(this.button5);
             this.rooms.Controls.Add(this.label3);
-            this.rooms.Controls.Add(this.checkedListBox2);
             this.rooms.Location = new System.Drawing.Point(4, 22);
             this.rooms.Name = "rooms";
             this.rooms.Size = new System.Drawing.Size(434, 307);
             this.rooms.TabIndex = 2;
             this.rooms.Text = "Rooms";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id});
+            this.dataGridView1.Location = new System.Drawing.Point(10, 31);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(412, 233);
+            this.dataGridView1.TabIndex = 7;
             // 
             // button4
             // 
@@ -194,16 +209,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Current rooms";
             // 
-            // checkedListBox2
-            // 
-            this.checkedListBox2.CheckOnClick = true;
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(10, 31);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(411, 229);
-            this.checkedListBox2.Sorted = true;
-            this.checkedListBox2.TabIndex = 3;
-            // 
             // devices
             // 
             this.devices.BackColor = System.Drawing.Color.LightGray;
@@ -239,7 +244,6 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // checkedListBox1
             // 
@@ -259,12 +263,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Current devices";
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.ClientSize = new System.Drawing.Size(466, 351);
+            this.ClientSize = new System.Drawing.Size(466, 349);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -276,6 +287,7 @@
             this.mqtt.PerformLayout();
             this.rooms.ResumeLayout(false);
             this.rooms.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.devices.ResumeLayout(false);
             this.devices.PerformLayout();
             this.ResumeLayout(false);
@@ -302,6 +314,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox2;
-        public System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }
