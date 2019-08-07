@@ -8,33 +8,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Homie_App
 {
+
     public partial class addRoom : Form
     {
+
+
         SettingsForm settingsform;
-        public addRoom(SettingsForm f)
+        public addRoom()
         {
             InitializeComponent();
-            settingsform = f;
         }
 
         public void PictureBox1_Click(object sender, EventArgs e)
         {
-            var line = textBox1.Text;
-            if (File.ReadAllLines("../../settings.txt").Length == 0)
+            SettingsForm.Room r = new SettingsForm.Room();
+            r.name = textBox1.Text;
+
+            string connection = "Data Source=Database.db";
+            try
             {
-                File.AppendAllText("../../settings.txt", line);
+                SQLiteConnection conn = new SQLiteConnection(connection);
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO ROOMS (ROOM_NAME) VALUES (@ROOM_NAME)", conn);
+                cmd.Parameters.AddWithValue("ROOM_NAME", r.name);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Sucess!");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Couldn't add room: " + ex.Message);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                File.AppendAllText("../../settings.txt", Environment.NewLine + line);
+                MessageBox.Show("Error: " + ex.Message);
             }
-            
-            this.Close();
-            var rooms = File.ReadAllLines("../../settings.txt");
-            settingsform.checkedListBox2.DataSource = rooms;
 
         }
     }

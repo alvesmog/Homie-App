@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
+using System.Data.SQLite;
 
 namespace Homie_App
 {

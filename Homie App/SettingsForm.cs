@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Homie_App.Properties;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Data.SQLite;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
-using Homie_App.Properties;
-using System.IO;
 
 namespace Homie_App
 {
@@ -17,10 +13,21 @@ namespace Homie_App
     {
         MqttClient client;
 
+        public class Room
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+
+        }
+
+        private static string connection = "Data Source=Database.db";
+        private static string databaseName = "Database.db";
+
         public SettingsForm()
         {
             InitializeComponent();
 
+            //MQTT Parameters
 
             string Mqtt_Server_IP;
             string user;
@@ -34,24 +41,39 @@ namespace Homie_App
             this.textBox2.Text = user;
             this.textBox3.Text = pass;
 
-            var rooms = File.ReadAllLines("../../settings.txt");
-            checkedListBox2.DataSource = rooms;
-
             if (Mqtt_Server_IP != "0")
             {
                 this.client = new MqttClient(Mqtt_Server_IP);
                 this.client.Connect(Guid.NewGuid().ToString(), user, pass);
             }
 
+            //Database parameters
 
+            if (!File.Exists(databaseName))
+            {
+                SQLiteConnection.CreateFile(databaseName);
+                SQLiteConnection conn = new SQLiteConnection(connection);
+                conn.Open();
 
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine("CREATE TABLE IF NOT EXISTS ROOMS ([ID] INTEGER PRIMARY KEY AUTOINCREMENT, [ROOM_NAME] VARCHAR(100))");
+                SQLiteCommand cmd = new SQLiteCommand(sql.ToString(), conn);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Couldn't create database " + ex.Message);
+                }
+                conn.Close();
+
+            }
+
+            Load_rooms();
         }
 
-        public void Refresh_Listbox()
-        {
-            this.checkedListBox1.Invalidate();
-        }
-
+        //Change MQTT settings
         private void Button1_Click(object sender, EventArgs e)
         {
             Settings.Default["Mqtt_Server_IP"] = textBox1.Text;
@@ -61,45 +83,72 @@ namespace Homie_App
             MessageBox.Show("Settings saved!", "Homie says...");
         }
 
+        //Load rooms
+
+        public void Load_rooms()
+        {
+            SQLiteConnection conn = new SQLiteConnection(connection);
+            conn.Open();
+
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM ROOMS", conn);
+            SQLiteDataReader dr = cmd.ExecuteReader();
+            List<Room> list = new List<Room>();
+            while (dr.Read())
+            {
+                list.Add(new Room { id = Convert.ToInt32(dr["id"]), name = dr["ROOM_NAME"].ToString() });
+            }
+            dataGridView1.DataSource = list;
+            conn.Close();
+        }
+
+        //Add new room
         private void Button5_Click(object sender, EventArgs e)
         {
-            var addRoom = new addRoom(this);
-            addRoom.Show();
-        }
-
-        private void Button4_Click(object sender, EventArgs e)
-        {
-            List<string> lines = File.ReadAllLines("../../settings.txt").ToList();
-
-            foreach (string selectedItem in checkedListBox2.CheckedItems)
-            {
-                if (lines.Contains(selectedItem))
-                {
-                    lines.Remove(selectedItem);
-                }
-
-                File.WriteAllLines("../../settings.txt", lines.ToArray());
-
-                var rooms = File.ReadAllLines("../../settings.txt");
-                checkedListBox2.DataSource = rooms;
-
-            }
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
             this.Enabled = false;
-            addDevice f = new addDevice();
-            f.FormClosed += HandleAddDeviceFormClosed;
+            addRoom f = new addRoom();
+            f.FormClosed += HandleAddRoomFormClosed;
             f.Show();
         }
 
-
-        private void HandleAddDeviceFormClosed(Object sender, FormClosedEventArgs e)
+        private void HandleAddRoomFormClosed(Object sender, FormClosedEventArgs e)
         {
             this.Enabled = true;
-            var devices = File.ReadAllLines("../../devices.txt");
-            checkedListBox1.DataSource = devices;
+            Load_rooms();
         }
+
+        //Delete room
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            SQLiteConnection conn = new SQLiteConnection(connection);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand("DELETE FROM ROOMS WHERE ID = @ID", conn);
+            cmd.Parameters.AddWithValue("ID", Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Load_rooms();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+        //Add new device
+        //private void Button2_Click(object sender, EventArgs e)
+        //{
+        //    this.Enabled = false;
+        //    addDevice f = new addDevice();
+        //    f.FormClosed += HandleAddDeviceFormClosed;
+        //    f.Show();
+        //}
+
+        //private void HandleAddDeviceFormClosed(Object sender, FormClosedEventArgs e)
+        //{
+        //    this.Enabled = true;
+        //    var devices = File.ReadAllLines("../../devices.txt");
+        //    checkedListBox1.DataSource = devices;
     }
 }
+
