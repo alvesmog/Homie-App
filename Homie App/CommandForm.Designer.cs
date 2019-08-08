@@ -32,7 +32,17 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.toggleSwitch1 = new ToggleSwitch.ToggleSwitch();
+            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
+            this.toggleSwitch2 = new ToggleSwitch.ToggleSwitch();
+            this.elementHost3 = new System.Windows.Forms.Integration.ElementHost();
+            this.toggleSwitch3 = new ToggleSwitch.ToggleSwitch();
+            this.elementHost4 = new System.Windows.Forms.Integration.ElementHost();
+            this.toggleSwitch4 = new ToggleSwitch.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -58,13 +68,62 @@
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(231, 284);
+            this.pictureBox1.Location = new System.Drawing.Point(244, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(36, 35);
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.elementHost4);
+            this.panel1.Controls.Add(this.elementHost3);
+            this.panel1.Controls.Add(this.elementHost2);
+            this.panel1.Controls.Add(this.elementHost1);
+            this.panel1.Location = new System.Drawing.Point(16, 109);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(250, 205);
+            this.panel1.TabIndex = 4;
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(180, 25);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(66, 38);
+            this.elementHost1.TabIndex = 0;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.toggleSwitch1;
+            // 
+            // elementHost2
+            // 
+            this.elementHost2.Location = new System.Drawing.Point(180, 69);
+            this.elementHost2.Name = "elementHost2";
+            this.elementHost2.Size = new System.Drawing.Size(66, 38);
+            this.elementHost2.TabIndex = 1;
+            this.elementHost2.Text = "elementHost2";
+            this.elementHost2.Child = this.toggleSwitch2;
+            // 
+            // elementHost3
+            // 
+            this.elementHost3.Location = new System.Drawing.Point(180, 113);
+            this.elementHost3.Name = "elementHost3";
+            this.elementHost3.Size = new System.Drawing.Size(66, 38);
+            this.elementHost3.TabIndex = 2;
+            this.elementHost3.Text = "elementHost3";
+            this.elementHost3.Child = this.toggleSwitch3;
+            // 
+            // elementHost4
+            // 
+            this.elementHost4.Location = new System.Drawing.Point(180, 157);
+            this.elementHost4.Name = "elementHost4";
+            this.elementHost4.Size = new System.Drawing.Size(66, 38);
+            this.elementHost4.TabIndex = 3;
+            this.elementHost4.Text = "elementHost4";
+            this.elementHost4.Child = this.toggleSwitch4;
             // 
             // CommandForm
             // 
@@ -72,6 +131,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(276, 326);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
@@ -85,6 +145,7 @@
             this.Tag = "f";
             this.Text = "Homie App";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,6 +155,15 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Integration.ElementHost elementHost4;
+        private ToggleSwitch.ToggleSwitch toggleSwitch4;
+        private System.Windows.Forms.Integration.ElementHost elementHost3;
+        private ToggleSwitch.ToggleSwitch toggleSwitch3;
+        private System.Windows.Forms.Integration.ElementHost elementHost2;
+        private ToggleSwitch.ToggleSwitch toggleSwitch2;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private ToggleSwitch.ToggleSwitch toggleSwitch1;
     }
 }
 
