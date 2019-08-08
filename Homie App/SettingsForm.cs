@@ -87,6 +87,7 @@ namespace Homie_App
 
         public void Load_rooms()
         {
+
             SQLiteConnection conn = new SQLiteConnection(connection);
             conn.Open();
 
